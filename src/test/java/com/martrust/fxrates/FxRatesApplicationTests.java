@@ -26,7 +26,7 @@ class FxRatesApplicationTests {
 	@MockBean
 	private FxRateClient fxRateClient;
 
-	@Autowired
+	@MockBean
 	private FxRatesService fxRatesService;
 
 	@Test

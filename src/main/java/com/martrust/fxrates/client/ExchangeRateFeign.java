@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value="fx-rates-client",
         url = "http://api.exchangeratesapi.io/v1",
-        configuration = FeignClientConfiguration.class)
+        configuration = FeignClientConfiguration.class,
+        fallback = ExchangeRateFeign.ExchangeRateClientFallback.class)
 public interface ExchangeRateFeign {
 
     @GetMapping("/symbols")
