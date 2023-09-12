@@ -21,10 +21,7 @@ import java.util.Map;
 @RequestMapping("/api/fx-rates")
 public class FxRatesController {
 
-    @Autowired
     private FxRateClient client;
-
-    @Autowired
     private FxRatesService fxRatesService;
 
     @GetMapping("/symbols")

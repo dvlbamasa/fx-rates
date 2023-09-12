@@ -7,6 +7,7 @@ import com.martrust.fxrates.model.ConvertedRateResponse;
 import com.martrust.fxrates.model.RateResponse;
 import com.martrust.fxrates.model.SymbolsResponse;
 import com.martrust.fxrates.service.FxRatesService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,9 @@ import java.util.Map;
 
 
 @Service
+@AllArgsConstructor
 public class FxRatesServiceImpl implements FxRatesService {
 
-    @Autowired
     private FxRateClient fxRateClient;
 
     @Override

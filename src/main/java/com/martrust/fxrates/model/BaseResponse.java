@@ -18,5 +18,4 @@ public class BaseResponse {
         private String code;
         private String message;
     }
-
 }
