@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
 
 /**
  * Created by User: Donato Valenti Leandro Amasa
@@ -18,10 +17,8 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EmployeeMapper {
 
-    EmployeeMapper INSTANCE = Mappers.getMapper(EmployeeMapper.class);
-
     @Mappings({
-            @Mapping(target = "projectId", source = "project.id")
+            @Mapping(target = "payrollTransactions", source = "payrollTransactions")
     })
     EmployeeDto toDto(Employee employee);
 

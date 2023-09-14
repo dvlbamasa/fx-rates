@@ -19,5 +19,5 @@ public class EmployeeDto {
     private EmployeeStatus status;
     private Long id;
     private Set<PayrollTransactionDto> payrollTransactions;
-    private Long projectId;
+    private ProjectDto project;
 }

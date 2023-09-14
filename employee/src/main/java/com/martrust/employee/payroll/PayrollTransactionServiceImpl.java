@@ -4,6 +4,7 @@ import com.martrust.employee.registration.Employee;
 import com.martrust.employee.registration.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -22,7 +23,9 @@ public class PayrollTransactionServiceImpl implements PayrollTransactionService{
     private final EmployeeRepository employeeRepository;
     private final PayrollTransactionRepository payrollTransactionRepository;
     private final PayrollTransactionMapper payrollTransactionMapper;
+
     @Override
+    @Transactional
     public PayrollTransactionDto pay(PayrollTransactionDto payrollTransactionDto) {
         Optional<Employee> employee = employeeRepository.findById(payrollTransactionDto.getEmployeeId());
         if (employee.isPresent()) {
