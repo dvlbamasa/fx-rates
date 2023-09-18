@@ -1,6 +1,7 @@
 package com.martrust.employee.registration;
 
 import jakarta.annotation.Nullable;
+import org.javers.spring.annotation.JaversSpringDataAuditable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,13 +17,13 @@ import java.util.List;
  */
 
 @Repository
+@JaversSpringDataAuditable
 public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
 
     @EntityGraph(
             type = EntityGraph.EntityGraphType.FETCH,
             attributePaths = {
-                    "project",
-                    "payrollTransactions"
+                    "project"
             }
     )
     List<Employee> findAll(@Nullable Specification<Employee> specification);

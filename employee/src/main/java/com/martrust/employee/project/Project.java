@@ -27,6 +27,4 @@ public class Project extends BaseModel {
     private String name;
     private String clientName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
-    private Set<Employee> employees;
 }

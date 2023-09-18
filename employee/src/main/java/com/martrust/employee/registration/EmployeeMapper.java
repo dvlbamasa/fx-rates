@@ -17,9 +17,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EmployeeMapper {
 
-    @Mappings({
-            @Mapping(target = "payrollTransactions", source = "payrollTransactions")
-    })
     EmployeeDto toDto(Employee employee);
 
     Employee toEntity(EmployeeDto employeeDto);

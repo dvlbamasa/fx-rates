@@ -1,6 +1,5 @@
 package com.martrust.employee.search;
 
-import com.martrust.employee.registration.Employee;
 import com.martrust.employee.registration.EmployeeDto;
 import com.martrust.employee.registration.EmployeeStatus;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +26,10 @@ public class EmployeeSearchController {
     private final EmployeeSearchService searchService;
 
     @GetMapping
-    public List<EmployeeDto> search(@RequestParam(required = false) Optional<BigDecimal> minAmount,
-                                    @RequestParam(required = false) Optional<BigDecimal> maxAmount,
+    public List<EmployeeDto> search(@RequestParam(required = false) Optional<String> projectName,
                                     @RequestParam(required = false) Optional<EmployeeStatus> status) {
         EmployeeSearchCriteria searchCriteria = EmployeeSearchCriteria.builder()
-                .maxAmount(maxAmount)
-                .minAmount(minAmount)
+                .projectName(projectName)
                 .employeeStatus(status)
                 .build();
         return searchService.search(searchCriteria);

@@ -1,13 +1,12 @@
 package com.martrust.employee.search;
 
-import com.martrust.employee.payroll.PayrollTransaction;
+import com.martrust.employee.project.Project;
 import com.martrust.employee.registration.Employee;
 import com.martrust.employee.registration.EmployeeStatus;
 import com.martrust.employee.registration.Employee_;
 import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -19,22 +18,21 @@ public final class EmployeeSpecifications {
 
     public static Specification<Employee> createEmployeeSpecification(EmployeeSearchCriteria searchCriteria) {
         return statusEqualTo(searchCriteria.getEmployeeStatus())
-                .and(amountBetween(searchCriteria.getMinAmount(), searchCriteria.getMaxAmount()));
+                .and(projectNameEqualTo(searchCriteria.getProjectName()));
     }
 
     public static Specification<Employee> statusEqualTo(Optional<EmployeeStatus> employeeStatus) {
         return ((root, query, criteriaBuilder) ->
                 employeeStatus.map(status -> criteriaBuilder.equal(root.get(Employee_.STATUS),
-                        employeeStatus.get())).orElse(null));
+                        status)).orElse(null));
     }
 
-    public static Specification<Employee> amountBetween(Optional<BigDecimal> minAmount,
-                                                        Optional<BigDecimal> maxAmount) {
+    public static Specification<Employee> projectNameEqualTo(Optional<String> projectName) {
         return ((root, query, criteriaBuilder) -> {
-            Join<Employee, PayrollTransaction> payrollEmployee = root.join("payrollTransactions");
-            return minAmount.map(min ->
-                    maxAmount.map(max -> criteriaBuilder.between(payrollEmployee.get("amount"), min, max))
-                    .orElse(null)).orElse(null);
+            Join<Employee, Project> payrollEmployee = root.join("project");
+            return projectName.map(name ->
+                    criteriaBuilder.equal(payrollEmployee.get("name"), name)).orElse(null);
+
         });
     }
 }

@@ -17,6 +17,5 @@ import java.util.Optional;
 public class EmployeeSearchCriteria {
 
     private Optional<EmployeeStatus> employeeStatus;
-    private Optional<BigDecimal> minAmount;
-    private Optional<BigDecimal> maxAmount;
+    private Optional<String> projectName;
 }
