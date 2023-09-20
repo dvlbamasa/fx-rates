@@ -37,4 +37,14 @@ public class RabbitMQController {
     public String producer2(@RequestBody EmployeeDetail employeeDetail) {
         rabbitMQSender.send2(employeeDetail);
         return "Message sent successfully to the RabbitMQ server";
-    }}
+    }
+
+    @PostMapping("/dlx")
+    public String producer3(@RequestBody EmployeeDetail employeeDetail) {
+        rabbitMQSender.sendDeadLetter(employeeDetail);
+        return "Message sent successfully to the RabbitMQ server for DLX";
+    }
+
+}
+
+

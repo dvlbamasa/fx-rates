@@ -25,6 +25,12 @@ public class RabbitMQSender {
     @Value("${rabbitmq.exchange}")
     private String exchange;
 
+    @Value("${rabbitmq.exchange.new}")
+    private String exchangeNew;
+
+    @Value("${rabbitmq.routing.key.new}")
+    private String routingKeyNew;
+
     @Value("${rabbitmq.routingkey}")
     private String routingkey;
 
@@ -40,5 +46,10 @@ public class RabbitMQSender {
     public void send2(EmployeeDetail employeeDetail) {
         rabbitTemplate.convertAndSend(exchange, routingkey2, employeeDetail);
         LOGGER.info("Sending message to RabbitMQ queue2");
+    }
+
+    public void sendDeadLetter(EmployeeDetail employeeDetail) {
+        rabbitTemplate.convertAndSend(exchangeNew, routingKeyNew, employeeDetail);
+        LOGGER.info("Sending message to RabbitMQ exchangeNew to test DLQ");
     }
 }
